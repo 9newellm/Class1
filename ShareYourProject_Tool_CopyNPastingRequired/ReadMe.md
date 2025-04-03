@@ -1,11 +1,10 @@
-
 # Three Steps for Successful Utilization (To-Do List)
 
 ---
 
+* [ ]  **Ensure Project Directory Structure Is Correct 📁**
 
-
-* ** Ensure Project Directory Is Correct**
+**📁 I reccomend creating your project structure via the good old fashion copy and pasting technique.📁**
 
 /your-project-directory
 
@@ -21,23 +20,30 @@
 
 └──generate_pipInstallRequriments.py
 
-How? Easy... Copy and paste the generate_exensions.py and generate_pipInstallRequriments.py into your project main. 
+---
+
+
+
+* [ ] ****Run**: generate_extensions.py🚀**
+
+```
+py -m extensions.py
+```
+
+**Output**: 📁 │   └──extensions.txt   
+
+---
+
+* [ ] **Run: generate_pipInstallRequriments.py🚀**
+
+```
+py -m generate_pipInstallRequriments.py
+```
+
+**Output**: 📁  └──requirements.txt
 
 ---
 
 
 
-* [ ] ****Run**: generate_extensions.py**
-
-Output: │   └──extensions.txt
-
----
-
-
-
-* ** Run: generate_pipInstallRequriments.py**
-
-Output: │   └──requirements.txt
-
-
-## Boom your done... :-). Share Your Project! Don't forget to like subscribe and link this tool.
+## Boom your done... :-). Share Your Project! Don't forget to like, subscribe. and link this tool.
