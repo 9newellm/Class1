@@ -40,7 +40,7 @@ def analyze_raman_data(file_path):
         'Peak Intensity': peak_intensities
     })
 
-from config import * 
+from ProjectConfig import * 
 # Example: Analyze data from a specific file
 if ISTEST: 
     peaks = analyze_raman_data(ISNAME_FOR_TEST)
