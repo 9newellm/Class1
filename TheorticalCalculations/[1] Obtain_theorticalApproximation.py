@@ -4,11 +4,13 @@ import numpy as np
 
 
 EXPERIMENTALwAVELENGTHoBTINAED = 589.56  # Example wavelength (e.g., 589.56 nm, Na-D2)
-SODIUM_Z = 11
+# SODIUM_Z = 11
+
+Effective_Z = 1 # (Tennyson Equation 6.1)
 
 """Na-S Lines refer to specific transitions in the sodium atom (Na), but not in the D-line region. These lines are related to forbidden transitions that occur in certain conditions (like in high-energy states or specific ionized states).
 
-The Na-S lines are part of the sodium spectrum, particularly in the ultraviolet (UV) or near-infrared regions. These lines are connected to the transitions involving the sodium atom in the S-shell, typically the 3^2S level.
+The Na-S lines are part of SampleTypes_Notes/Part 0. Effective Z. Understanding_Fundamental_Physics_Behind_Effective_Z.docx SampleTypes_Notes/Part 1. Effective_Z_and_Quantum_Defect_Explanation.docx SampleTypes_Notes/Part 2. (Effective Z___) Spectral_Imaging_Experiment_Na_Doublet.docxthe sodium spectrum, particularly in the ultraviolet (UV) or near-infrared regions. These lines are connected to the transitions involving the sodium atom in the S-shell, typically the 3^2S level.
 
 In sodium (Na), the Na-S lines generally involve transitions between these states:
 
