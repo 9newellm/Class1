@@ -1,0 +1,11 @@
+affenwiesel.matlab-formatter
+ansenhuang.vscode-view-readme
+cweijan.vscode-office
+gimly81.matlab
+juliencroain.markdown-viewer
+mathematic.vscode-latex
+mathworks.language-matlab
+mjpvs.latex-previewer
+ms-python.debugpy
+ms-python.python
+ms-python.vscode-pylance

@@ -1,0 +1,5 @@
+1. What is the machine software. 
+2. How do i calibrate it/ what is the lamb for calibation. 
+3. what are common issues i will have with the software. 
+4. What samples am I using. 
+5. Short overview of alignment... i belive once aligned I should get all the data i need to collect? 
