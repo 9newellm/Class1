@@ -1,14 +1,37 @@
 # Python script to compare a given experimental wavelength to theoretical wavelengths for Na-S lines
 
 import numpy as np
+from FormatConfig import *
+import pandas as pd
+
+def classify_wavelength(wavelength):
+    """
+    Classifies a given wavelength (in nm) into its corresponding region 
+    in the electromagnetic spectrum.
+    """
+    if wavelength < 10:
+        return "X-rays or Gamma rays"
+    elif 10 <= wavelength < 400:
+        return "Ultraviolet (UV)"
+    elif 400 <= wavelength < 700:
+        return "Visible Light"
+    elif 700 <= wavelength < 1000000:  # 1 mm = 1,000,000 nm
+        return "Infrared (IR)"
+    elif 1000000 <= wavelength < 1000000000:  # 1 m = 1,000,000,000 nm
+        return "Microwaves"
+    else:
+        return "Radio Waves"
+
+# Example usage:
+wavelength_nm = 589  # Example for Sodium D-line
+spectrum_region = classify_wavelength(wavelength_nm)
+print(f"The wavelength {wavelength_nm} nm falls in the {spectrum_region} region.")
 
 
-EXPERIMENTALwAVELENGTHoBTINAED = 589.56  # Example wavelength (e.g., 589.56 nm, Na-D2)
-# SODIUM_Z = 11
+"""
+Documented Notes: 
 
-Effective_Z = 1 # (Tennyson Equation 6.1)
-
-"""Na-S Lines refer to specific transitions in the sodium atom (Na), but not in the D-line region. These lines are related to forbidden transitions that occur in certain conditions (like in high-energy states or specific ionized states).
+Na-S Lines refer to specific transitions in the sodium atom (Na), but not in the D-line region. These lines are related to forbidden transitions that occur in certain conditions (like in high-energy states or specific ionized states).
 
 The Na-S lines are part of SampleTypes_Notes/Part 0. Effective Z. Understanding_Fundamental_Physics_Behind_Effective_Z.docx SampleTypes_Notes/Part 1. Effective_Z_and_Quantum_Defect_Explanation.docx SampleTypes_Notes/Part 2. (Effective Z___) Spectral_Imaging_Experiment_Na_Doublet.docxthe sodium spectrum, particularly in the ultraviolet (UV) or near-infrared regions. These lines are connected to the transitions involving the sodium atom in the S-shell, typically the 3^2S level.
 
@@ -21,27 +44,33 @@ Because these transitions are forbidden or weak, they are more challenging to de
 Common Na-S Lines:
 Na (3^2S1/2 → 3^2P1/2): In the UV range, but typically much weaker than the more prominent D-line emissions."""
 
-# Constants
+### User defined inputs. 
+EXPERIMENTALwAVELENGTHoBTINAED = 800.56  # Example wavelength (e.g., 589.56 nm, Na-D2)
+
+### System Constants
+Z_SODIUM = 11
+Z_EFFECTIVE = 1 # (Tennyson Equation 6.1)
 R_H = 1.097373e7  # Rydberg constant in m^-1
 R_H = R_H * 10**(-9)
-print(R_H)
+
 # Function to calculate theoretical wavelengths for Na-S lines
-def calculate_theoretical_wavelengths(n1, n_max=10):
+def calculate_theoretical_wavelengths(n1, n_max=10, Z=1):
     """
     Calculate theoretical wavelengths for transitions from n_max to n1 (e.g., n1 = 3 for Na-S lines).
     """
-    wavelengths = []
+    wavelengths, wavelengthClassification = [], []
     for n2 in range(n_max, n1, -1):  # From n_max to n1
-        wavelength = 1 / (R_H * SODIUM_Z**2 * (1/n1**2 - 1/n2**2))  # Using Rydberg formula
+        wavelength = 1 / (R_H * Z**2 * (1/n1**2 - 1/n2**2))  # Using Rydberg formula
         wavelengths.append(wavelength)  # Convert from meters to nm
-    return wavelengths
+        wavelengthClassification = classify_wavelength(wavelength) # must be in nm
+    return wavelengths, wavelengthClassification
 
 # Function to compare experimental wavelength with theoretical wavelengths
-def compare_wavelengths(experimental_wavelength, n1=3, n_max=10):
+def compare_wavelengths(experimental_wavelength, n1=3, n_max=10, Z_Choice=1):
     """
     Compare the experimental wavelength with theoretical wavelengths for Na-S lines
     """
-    theoretical_wavelengths = calculate_theoretical_wavelengths(n1, n_max)
+    theoretical_wavelengths, classify = calculate_theoretical_wavelengths(n1, n_max, Z=Z_Choice)
     
     print("Experimental wavelength:", experimental_wavelength, "nm")
     print("Theoretical wavelengths for Na-S lines (n -> 3):")
@@ -55,6 +84,35 @@ def compare_wavelengths(experimental_wavelength, n1=3, n_max=10):
 
     print(f"\nClosest theoretical wavelength: {closest_theoretical:.2f} nm (n={closest_n2} to n={n1})")
 
-# Example usage
-compare_wavelengths(EXPERIMENTALwAVELENGTHoBTINAED, n1=3, n_max=21)  # n1=3 corresponds to Na-S lines
+        # Create a dictionary to store the data
+    data = {
+    "Theoretical Wavelengths (nm)": theoretical_wavelengths,
+    "Z":Z_Choice, 
+    "classifications": classify}
 
+    return pd.DataFrame(data)
+
+if __name__ == "__main__":
+    print(LINE_UNDERSCORE_HOLD_MAIN_15)
+    print("LOOKING AT THE EFFECTIVE Z FOR SODIUM. Before considering external impact.")
+    set1 = compare_wavelengths(EXPERIMENTALwAVELENGTHoBTINAED, n1=3, n_max=21, Z_Choice=Z_SODIUM)  # n1=3 corresponds to Na-S lines
+    print(LINE_UNDERSCORE_HOLD_MAIN_15)
+
+    print(LINE_UNDERSCORE_HOLD_MAIN_15)
+    print("LOOKING AT THE EFFECTIVE Z FOR HYDROGEN.")
+    set2 =  compare_wavelengths(EXPERIMENTALwAVELENGTHoBTINAED, n1=3, n_max=21, Z_Choice=Z_EFFECTIVE)  # n1=3 corresponds to Na-S lines
+    print(LINE_UNDERSCORE_HOLD_MAIN_15)
+
+        # Subtract corresponding columns
+    df_diff = set1["Theoretical Wavelengths (nm)"] - set2["Theoretical Wavelengths (nm)"]  # Or use df1.sub(df2)
+    df_abs_diff = df_diff.abs()
+
+    print(LINE_UNDERSCORE_HOLD_MAIN_15)
+    print("Displaying the difference between two different z-sets")
+    # Display the result
+    print(df_abs_diff)
+    ## Range of wavelengths (display them to show the user). 
+    print(set1["classifications"])
+
+    ## Range of wavelengths (display them to show the user). 
+    print(set2["classifications"])
