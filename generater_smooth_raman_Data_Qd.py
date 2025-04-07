@@ -47,3 +47,8 @@ def generate_raman_data(file_name):
 
 # Generate the Raman data and save to Excel
 generate_raman_data("raman_spectrometer_data_with_sample.xlsx")
+
+
+# All they did was overwhelm her. And so, she did bad anyway. 
+# It only validated the argement that they are targeting her. 
+# We have documneted a massive 
