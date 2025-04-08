@@ -1,5 +1,7 @@
 from docx import Document
 
+from FOLDER_CONFIG import *
+
 # Create a new Document
 doc = Document()
 doc.add_heading('Major Fraunhofer Lines', 0)
@@ -34,5 +36,7 @@ for line, element, wavelength in fraunhofer_lines:
     row_cells[1].text = element
     row_cells[2].text = str(wavelength)
 
-# Save the document
-doc.save('Fraunhofer_Lines_Table.docx')
+
+if NEWCONFIG_STRUCUTURE: 
+    # Save the document
+    doc.save('Fraunhofer_Lines_Table.docx')
