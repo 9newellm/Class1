@@ -1,24 +1,12 @@
+# Import General pytohn improts
 import win32com.client
 from win32com.universal import com_error
 import numpy as np
 import matplotlib.pyplot as plt
 import time
 
-# Constants for ASCOM FLI Camera API
-ASCOM_FLI_KEPLER_CAMERA = 'ASCOM.FLI.Kepler.Camera'
-ASCOM_FLI_KEPLER_GET_MODE = 'GetMode'
-ASCOM_FLI_KEPLER_SET_MODE = 'SetMode'
-ASCOM_FLI_KEPLER_GET_MODESLIST = 'GetModesList'
-ASCOM_FLI_KEPLER_GET_LOWGAIN = 'GetLowGain'
-ASCOM_FLI_KEPLER_SET_LOWGAIN = 'SetLowGain'
-ASCOM_FLI_KEPLER_GET_HIGHGAIN = 'GetHighGain'
-ASCOM_FLI_KEPLER_SET_HIGHGAIN = 'SetHighGain'
-ASCOM_FLI_KEPLER_GET_LOWGAINTABLE = 'GetLowGainTable'
-ASCOM_FLI_KEPLER_GET_HIGHGAINTABLE = 'GetHighGainTable'
-ASCOM_FLI_KEPLER_GET_BLACKLEVELLOW = 'GetBlackLevelLo'
-ASCOM_FLI_KEPLER_GET_BLACKLEVELHIGH = 'GetBlackLevelHi'
-ASCOM_FLI_KEPLER_GET_BLACKSUNLOW = 'GetBlackSunLo'
-ASCOM_FLI_KEPLER_GET_BLACKSUNHIGH = 'GetBlackSunLo'
+## Import General Configuration Tools 
+from ASCOM_CONFIG_API import * 
 
 def connect_camera():
     """
