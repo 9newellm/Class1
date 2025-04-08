@@ -67,4 +67,6 @@ def main():
         print(f"{mscoree_dll_path} not found.")
 
 if __name__ == "__main__":
+
+    print("This requires administrative privileges")
     main()

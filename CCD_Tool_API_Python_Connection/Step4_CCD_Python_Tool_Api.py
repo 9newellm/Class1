@@ -7,6 +7,13 @@ import time
 
 ## Import General Configuration Tools 
 from ASCOM_CONFIG_API import * 
+import os 
+
+import clr
+script_dir = os.path.dirname(os.path.abspath(__file__))
+clr.AddReference(script_dir+'/CCD_Tool_API_Python_Connection/ASCOM-Python-Programming/libflipro.x64.dll')
+
+clr.AddReference(script_dir+'/CCD_Tool_API_Python_Connection/ASCOM-Python-Programming/libflipro.x86.dll')
 
 def connect_camera():
     """
